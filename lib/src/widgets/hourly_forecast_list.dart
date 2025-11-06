@@ -21,7 +21,7 @@ class HourlyForecastList extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 170,
+      height: 140,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -33,30 +33,34 @@ class HourlyForecastList extends StatelessWidget {
             settings.temperatureUnit,
           );
           return Card(
-            child: Container(
+            child: SizedBox(
               width: 110,
-              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 16),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget>[
-                  Text(
-                    Formatters.formatHour(item.time),
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                  const SizedBox(height: 12),
-                  Image.network(
-                    Formatters.iconUrl(item.iconCode),
-                    width: 54,
-                    height: 54,
-                    fit: BoxFit.contain,
-                  ),
-                  const SizedBox(height: 12),
-                  Text(
-                    temperature,
-                    style: Theme.of(context).textTheme.titleMedium,
-                  ),
-                ],
+              child: Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    Text(
+                      Formatters.formatHour(item.time),
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                    const SizedBox(height: 6),
+                    SizedBox(
+                      height: 38,
+                      child: Image.network(
+                        Formatters.iconUrl(item.iconCode),
+                        fit: BoxFit.contain,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    Text(
+                      temperature,
+                      style: Theme.of(context).textTheme.titleSmall,
+                    ),
+                  ],
+                ),
               ),
             ),
           );
