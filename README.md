@@ -6,8 +6,8 @@ A Flutter application built for the **Flutter Intern Hackathon Challenge**. The 
 
 - 🔍 **City search** with type-ahead suggestions, loading indicators, and graceful error handling.
 - ☀️ **Current conditions** including temperature, feels-like, humidity, wind, status icon, and timestamps.
+- � **Hourly outlook** (next 24h) in a horizontal carousel with icons and temperatures.
 - 📅 **5-day forecast** with min/max temperatures, icons, and friendly day labels.
-- 🕒 **Hourly outlook** (next 24h) displayed in a horizontal carousel.
 - ⭐ **Favorite cities** persisted with `shared_preferences`, quick access chips, and swipe-to-delete management.
 - 📍 **Current location weather** using `geolocator`, with permission handling and fallbacks.
 - 🔄 **Unit conversion** toggles for °C/°F and km/h/mph, saved between sessions.

@@ -27,23 +27,27 @@ Navigation is handled via `AppRouter` with four primary routes: home, search, de
    - Favorites stored as JSON-encoded `CityLocation` entries in `SharedPreferences`.
    - Settings persist enum names; last-selected city stored separately for startup hydration.
 
-## API Integration
+## API Setup & Integration
 
+- **Provider**: [OpenWeatherMap](https://openweathermap.org/api)
 - **Base URL**: `https://api.openweathermap.org/data/2.5/`
 - **Endpoints**:
-  - Current weather (`/weather`) by city name or geographic coordinates.
-  - 5-day / 3-hour forecast (`/forecast`) for daily/hourly views.
-  - City search uses the Geocoding endpoint (`/geo/1.0/direct`) for auto-complete suggestions.
-- **Authentication**: API key injected via `--dart-define=OPENWEATHER_API_KEY=...`.
-- **Units**: Requests use Kelvin / m·s⁻¹ defaults; conversions handled locally to support user preferences.
+  - `/weather` for the selected city or current coordinates.
+  - `/forecast` (5-day / 3-hour cadence) for daily and hourly forecasts.
+  - `/geo/1.0/direct` for city lookup and auto-complete.
+- **Authentication**:
+  1.  Create an account at OpenWeatherMap and copy your API key from _My API Keys_.
+  2.  Run the app with `flutter run --dart-define=OPENWEATHER_API_KEY=YOUR_KEY` or configure the same flag in IDE launch settings.
+  3.  The key is required at runtime; missing keys emit a user-facing error from `WeatherService`.
+- **Units**: Requests use Kelvin and m·s⁻¹ defaults; conversions happen client-side via model getters to support user-selected units.
 
 ## Assumptions & Constraints
 
-- Free-tier API limits (1,000 calls/day, 60/min) are respected through efficient caching of the current selection; users must avoid rapid, repeated refreshes.
-- Location access may be denied; when that occurs the controller falls back to favorites or prompts the user.
-- Network errors display user-friendly messages; detailed diagnostics appear in debug console logs.
-- UI assets rely on OpenWeather icon URLs; custom theming/animations can be layered on later.
-- The project targets Flutter 3.16+ with Dart 3.2+, aligning with the latest stable channel at the time of writing.
+- Free-tier API limits (1,000 calls/day, 60/min) apply; avoid spamming refresh/search.
+- Location permission can be denied; the controller falls back to favorites or manual search.
+- Network or API failures display concise messages; more detail is available through debug logging.
+- OpenWeather icon URLs are used directly; bundle or cache assets if offline support is needed.
+- Targeted Flutter version is 3.16+ on the stable channel with Dart 3.2+.
 
 ## Extension Ideas
 
